@@ -2,7 +2,6 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
     
 }
-
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -20,7 +19,7 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require('./routes/review');
 const MongoDBStore = require("connect-mongo")(session);
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
+const dbUrl = process.env.DB_URL ;
 
 
 
@@ -158,9 +157,9 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode).render('error', { err })
 })
-
-app.listen(5000, () => {
-    console.log('Serving on port 5000')
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Serving on port${port}`)
 })
 
 
